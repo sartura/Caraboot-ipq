@@ -451,6 +451,10 @@ static u32 qca8075_phy_set_combo_mode(u32 dev_id, u32 phy_id)
 	if (phy_id == COMBO_PHY_ID) {
 		phy_data = qca8075_phy_reg_read(dev_id, phy_id, QCA8075_PHY_CHIP_CONFIG);
 		printf("QCA8075_PHY_CHIP_CONFIG: 0x%x\n", phy_data);
+		phy_data |= 0x0003;
+		qca8075_phy_reg_write(dev_id, COMBO_PHY_ID, QCA8075_PHY_CHIP_CONFIG, phy_data);
+		phy_data = qca8075_phy_reg_read(dev_id, phy_id, QCA8075_PHY_CHIP_CONFIG);
+		printf("QCA8075_PHY_CHIP_CONFIG: 0x%x\n", phy_data);
 	}
 
 	return 0;
