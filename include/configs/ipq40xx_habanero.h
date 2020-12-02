@@ -29,8 +29,14 @@
 #define CONFIG_PCI_SCAN_SHOW
 #endif
 
+#define CONFIG_QPIC_NAND
+#ifdef CONFIG_QPIC_NAND
+#define CONFIG_RBTREE
+#define CONFIG_CMD_UBI
+#endif
+
 #define MTDPARTS_DEFAULT	"mtdparts=nand2:0x1E40000@0x1C0000(firmware)"
-#define MTDIDS_DEFAULT		"nand2=nand2"
+#define MTDIDS_DEFAULT		"nand0=nand0,nand2=nand2"
 
 #define CONFIG_FACTORY_IMG_FILENAME    "habanero.bin"
 
