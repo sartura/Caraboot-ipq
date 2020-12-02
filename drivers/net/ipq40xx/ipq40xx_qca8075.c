@@ -444,6 +444,18 @@ static u32 qca8075_phy_set_powersave(u32 dev_id, u32 phy_id, u8 enable)
 	return 0;
 }
 
+static u32 qca8075_phy_set_combo_mode(u32 dev_id, u32 phy_id)
+{
+	u16 phy_data;
+
+	if (phy_id == COMBO_PHY_ID) {
+		phy_data = qca8075_phy_reg_read(dev_id, phy_id, QCA8075_PHY_CHIP_CONFIG);
+		printf("QCA8075_PHY_CHIP_CONFIG: 0x%x\n", phy_data);
+	}
+
+	return 0;
+}
+
 void ess_reset(void)
 {
 	writel(0x1, 0x1812008);
@@ -774,6 +786,8 @@ int ipq40xx_qca8075_phy_init(struct ipq40xx_eth_dev *info)
 	phy_data = qca8075_phy_mmd_read(0, 4, QCA8075_PHY_MMD3_NUM, 0x805a);
 	phy_data &= (~(1 << 1));
 	qca8075_phy_mmd_write(0, 4, QCA8075_PHY_MMD3_NUM, 0x805a, phy_data);
+
+	qca8075_phy_set_combo_mode(0, COMBO_PHY_ID);
 
 	return 0;
 }
